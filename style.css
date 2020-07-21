@@ -1,0 +1,20 @@
+*, *:before, *:after {
+  box-sizing: border-box; 
+}
+
+/* 全体の設定 */
+html {
+  font-size: 62.5%;/* 文字は小さい */
+}
+
+/* 本文の設定 */
+body {
+/*  color: #444; /* 少しだけ明るい黒 */
+  background-color: hsl(0, 0%, 96%); /* 描画領域の外側は薄い灰色 */
+}
+
+/* 大見出しの設定 */
+h1 {
+  font-size: 1.8rem; /* 文字を大きく */
+}
+
