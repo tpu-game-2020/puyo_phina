@@ -1,4 +1,4 @@
-# ぷよぷよ with phina.js
+# ぷよぷよ in phina.js
 phina.js で動くようにした、ぷよぷよです。
 
 [『ぷよぷよプログラミング』](http://puyo.sega.jp/program_2020/)で動かしていますが、完全には、移植していないので不具合あります。
