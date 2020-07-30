@@ -28,7 +28,6 @@ var PADDLE_WIDTH    = 150;
 var PADDLE_HEIGHT   = 32;
 var BALL_RADIUS     = 16;
 var BALL_SPEED      = 16;
-// ★ぷよの表示制御
 
 
 var BOARD_SIZE      = CONFIG_PUYO_IMG_WIDTH * CONFIG_STAGE_COLS;
