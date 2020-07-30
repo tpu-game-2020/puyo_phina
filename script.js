@@ -23,9 +23,6 @@ var CONFIG_PLAYER_GROUND_FRAME = 20; // 何フレーム接地したらぷよを�
 var CONFIG_PLAYER_MOVE_FRAME = 10; // 左右移動に消費するフレーム数
 var CONFIG_PLAYER_ROTATE_FRAME = 10; // 回転に消費するフレーム数
 
-// ★ぷよの表示制御
-var MAX_PER_LINE    = 6;
-var BLOCK_NUM       = MAX_PER_LINE*5;
 var BLOCK_SIZE      = 64;
 var PADDLE_WIDTH    = 150;
 var PADDLE_HEIGHT   = 32;
@@ -686,52 +683,10 @@ phina.define("MainScene", {
 
     // スコア
     this.score = 0;
-
-
-  // ★使っていない
-    var gridX = Grid(BOARD_SIZE, MAX_PER_LINE);
-    var gridY = Grid(BOARD_SIZE, MAX_PER_LINE);
-
-    var self = this;
-
-    (BLOCK_NUM).times(function(i) {
-      // グリッド上でのインデックス
-      var xIndex = i%MAX_PER_LINE;
-      var yIndex = Math.floor(i/MAX_PER_LINE);
-      var angle = (360)/BLOCK_NUM*i;
-//      var block = Block(angle).addChildTo(this.group).setPosition(100, 100);
-
-//      block.x = gridX.span(xIndex) + BOARD_OFFSET_X;
-//      block.y = gridY.span(yIndex)+BOARD_OFFSET_Y;
-    }, this);
-
-    // ボール
-//    this.ball = Ball().addChildTo(this);
-
-    // パドル
-//    this.paddle = Paddle().addChildTo(this);
-//    this.paddle.setPosition(this.gridX.center(), this.gridY.span(15));
-//    this.paddle.hold(this.ball);
-
-    // タッチでゲーム開始
-    this.ballSpeed = 0;
-    this.one('pointend', function() {
-//      this.paddle.release();
-      this.ballSpeed = BALL_SPEED;
-    });
-
-    // 時間
-    this.time = 0;
-    // コンボ
-    this.combo = 0;
-  // ★使っていない
-
   },
 
   // メインループ
   update: function(app) {
-    // タイムを加算
-    this.time += app.deltaTime;
 
     switch(this.state)
     {
@@ -821,111 +776,7 @@ phina.define("MainScene", {
         break;
     }
     this.frame += app.deltaTime * 60.0;
-
-  // ★使っていない
-    // パドル移動
-//    this.paddle.x = app.pointer.x;
-//    if (this.paddle.left < 0) {
-//      this.paddle.left = 0;
-//    }
-//    if (this.paddle.right > this.gridX.width) {
-//      this.paddle.right = this.gridX.width;
-//    }
-
-    // スピードの数分, 移動と衝突判定を繰り返す
-//    (this.ballSpeed).times(function() {
-//      this.ball.move();
-//      this.checkHit();
-//    }, this);
-
-    // ブロックがすべてなくなったらクリア
-//    if (this.group.children.length <= 0) {
-//      this.gameclear();
-//    }
-  // ★使っていない
-},
-
-  // ★使っていない
-  checkHit: function() {
-    //
-    var ball = this.ball;
-
-    // 画面外対応
-    if (ball.left < 0) {
-      ball.left = 0;
-      ball.reflectX();
-    }
-    if (ball.right > this.gridX.width) {
-      ball.right = this.gridX.width
-      ball.reflectX();
-    }
-    if (ball.top < 0) {
-      ball.top = 0;
-      ball.reflectY();
-    }
-    if (ball.bottom > this.gridY.width) {
-      ball.bottom = this.gridY.width
-      ball.reflectY();
-      this.gameover();
-    }
-
-    // ボールとパドル
-    if (ball.hitTestElement(this.paddle)) {
-      ball.bottom = this.paddle.top;
-
-      var dx = ball.x - this.paddle.x;
-      ball.direction.x = dx;
-      ball.direction.y = -80;
-      ball.direction.normalize();
-
-      // speed up
-      this.ballSpeed += 1;
-
-      // コンボ数をリセット
-      this.combo = 0;
-    }
-  // ★使っていない
-
-  // ★使っていない
-  this.group.children.some(function(block) {
-    return false;
-    // ヒット
-      if (ball.hitTestElement(block)) {
-        var dq = Vector2.sub(ball, block);
-
-        if (Math.abs(dq.x) < Math.abs(dq.y)) {
-          ball.reflectY();
-          if (dq.y >= 0) {
-            ball.top = block.bottom;
-          }
-          else {
-            ball.bottom = block.top;
-          }
-        }
-        else {
-          ball.reflectX();
-          if (dq.x >= 0) {
-            ball.left = block.right;
-          }
-          else {
-            ball.right = block.left;
-          }
-        }
-
-        block.remove();
-
-        this.combo += 1;
-        this.score += this.combo*100;
-
-        var c = ComboLabel(this.combo).addChildTo(this);
-        c.x = this.gridX.span(12) + Math.randint(-50, 50);
-        c.y = this.gridY.span(12) + Math.randint(-50, 50);
-
-        return true;
-      }
-    }, this);
   },
-  // ★使っていない
 
   calculateScore: function(rensa, piece, color) {
     const rensaBonus = [0, 8, 16, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 480, 512, 544, 576, 608, 640, 672];
@@ -946,21 +797,6 @@ phina.define("MainScene", {
       score: this.score,
     });
   },
-
-  // ★使っていない
-  gameclear: function() {
-    // add clear bonus
-    var bonus = 2000;
-    this.score += bonus;
-
-    // add time bonus
-    var seconds = (this.time/1000).floor();
-    var bonusTime = Math.max(60*10-seconds, 0);
-    this.score += (bonusTime*10);
-
-    this.gameover();
-  },
-  // ★使っていない
 
   _accessor: {
     score: {
@@ -1031,125 +867,6 @@ phina.define('BG', {
   },
 });
 
-
-/*
- * ブロック
- */
-phina.define('Block', {
-  superClass: 'RectangleShape',
-
-  init: function(angle) {
-    this.superInit({
-      width: BLOCK_SIZE,
-      height: BLOCK_SIZE,
-      fill: 'hsl({0}, 80%, 60%)'.format(angle || 0),
-      stroke: null,
-      cornerRadius: 8,
-    });
-  },
-});
-
-/*
- * ボール
- */
-phina.define('Ball', {
-  superClass: 'CircleShape',
-
-  init: function() {
-    this.superInit({
-      radius: BALL_RADIUS,
-      fill: '#eee',
-      stroke: null,
-      cornerRadius: 8,
-    });
-
-    this.speed = 0;
-    this.direction = Vector2(1, -1).normalize();
-  },
-
-  move: function() {
-    this.x += this.direction.x;
-    this.y += this.direction.y;
-  },
-
-  reflectX: function() {
-    this.direction.x *= -1;
-  },
-  reflectY: function() {
-    this.direction.y *= -1;
-  },
-});
-
-
-
-/*
- * パドル
- */
-phina.define('Paddle', {
-  superClass: 'RectangleShape',
-  init: function() {
-    this.superInit({
-      width: PADDLE_WIDTH,
-      height: PADDLE_HEIGHT,
-      fill: '#eee',
-      stroke: null,
-      cornerRadius: 8,
-    });
-  },
-
-  hold: function(ball) {
-    this.ball = ball;
-  },
-
-  release: function() {
-    this.ball = null;
-  },
-
-  update: function() {
-    if (this.ball) {
-      this.ball.x = this.x;
-      this.ball.y = this.top-this.ball.radius;
-    }
-  }
-});
-
-/*
- * コンボラベル
- */
-phina.define('ComboLabel', {
-  superClass: 'Label',
-  init: function(num) {
-    this.superInit(num + ' combo!');
-
-    this.stroke = 'white';
-    this.strokeWidth = 8;
-
-    // 数によって色とサイズを分岐
-    if (num < 5) {
-      this.fill = 'hsl(40, 60%, 60%)';
-      this.fontSize = 16;
-    }
-    else if (num < 10) {
-      this.fill = 'hsl(120, 60%, 60%)';
-      this.fontSize = 32;
-    }
-    else {
-      this.fill = 'hsl(220, 60%, 60%)';
-      this.fontSize = 48;
-    }
-
-    // フェードアウトして削除
-    this.tweener
-      .by({
-        alpha: -1,
-        y: -50,
-      })
-      .call(function() {
-        this.remove();
-      }, this)
-      ;
-  },
-});
 
 phina.define("SplashScene", {
   // 継承
