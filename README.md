@@ -13,6 +13,8 @@ GitHub Pages の機能を使って、[「こちらのURLで」](https://tpu-game
 - 授業での知識を基にプログラムを改善する
 - 機能を追加する
 
+![プレイ画面](result.png)
+
 ## 方法
 - 本リポジトリをforkしてください
 - SettingsのGitHub Pagesの機能を使って、webページとして動くように設定してください。
