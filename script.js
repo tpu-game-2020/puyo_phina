@@ -893,7 +893,7 @@ phina.define("SplashScene", {
 phina.main(function() {
   // アプリケーションクラスの生成
   var app = GameApp({
-    title: 'Half-life3',
+    title: 'PUYOPUYO',
     startLabel: location.search.substr(1).toObject().scene || 'splash',
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
