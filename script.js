@@ -443,15 +443,15 @@ class Player{
   playing(frame, keyboard, scene) {
     // まず自由落下を確認する
     // 下キーが押されていた場合、それ込みで自由落下させる
-    if(this.falling(keyboard.getKey("down"))) {
+    if(this.falling(keyboard.getKey("s"))) {
       // 落下が終わっていたら、ぷよを固定する
       this.setPuyoPosition(scene);
       return 'fix';
     }
     this.setPuyoPosition(scene);
-    if(keyboard.getKeyDown("right") || keyboard.getKeyDown("left")) {
+    if(keyboard.getKeyDown("d") || keyboard.getKeyDown("a")) {
       // 左右の確認をする
-      const cx = (keyboard.getKeyDown("right")) ? 1 : -1;
+      const cx = (keyboard.getKeyDown("d")) ? 1 : -1;
       const x = this.puyoStatus.x;
       const y = this.puyoStatus.y;
       const mx = x + this.puyoStatus.dx;
@@ -490,7 +490,7 @@ class Player{
         this.puyoStatus.x += cx;
         return 'moving';
       }
-    } else if(keyboard.getKeyDown("up")) {
+    } else if(keyboard.getKeyDown("w")) {
       // 回転を確認する
       // 回せるかどうかは後で確認。まわすぞ
       const x = this.puyoStatus.x;
@@ -883,7 +883,7 @@ phina.define("SplashScene", {
     };
     // ラベル表示
     Label({
-      text: '↑：回転\n← ↓ →：移動',
+      text: 'w：回転\na s d：移動',
       fontSize: 64,
       fill: '#fff',
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
