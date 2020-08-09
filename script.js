@@ -904,5 +904,5 @@ phina.main(function() {
 
   app.enableStats(); // FPSを表示
 
-  app.run();// ゲーム開始
+  app.run();//ゲーム開始
 });
