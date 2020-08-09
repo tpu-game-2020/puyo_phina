@@ -893,11 +893,11 @@ phina.define("SplashScene", {
 phina.main(function() {
   // アプリケーションクラスの生成
   var app = GameApp({
-    title: 'puyo',
+    title: 'Half-life3',
     startLabel: location.search.substr(1).toObject().scene || 'splash',
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
-    backgroundColor: '#444',
+    backgroundColor: '#700',
     autoPause: true,
     debug: false,
   });
