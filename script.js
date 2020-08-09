@@ -16,7 +16,7 @@ var CONFIG_FREE_FALLING_SPEED = 16; // 自由落下のスピード
 var CONFIG_ERASE_PUYO_COUNT = 4; // 何個以上揃ったら消えるか
 var CONFIG_ERASE_ANIMATION_DURATION = 30; // 何フレームでぷよを消すか
 
-var CONFIG_PUYO_COLORS = 4; // 何色のぷよを使うか
+var CONFIG_PUYO_COLORS = 5; // 何色のぷよを使うか
 var CONFIG_PLAYER_FALLING_SPEED = 5.0; // プレイ中の自然落下のスピード
 var CONFIG_PLAYER_DOWN_SPEED = 10; // プレイ中の下キー押下時の落下スピード
 var CONFIG_PLAYER_GROUND_FRAME = 20; // 何フレーム接地したらぷよを固定するか
