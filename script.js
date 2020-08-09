@@ -681,7 +681,7 @@ phina.define("MainScene", {
     this.scoreLabel.fill = 'white';
 
     // スコア
-    this.score = 0;
+    this.score = 110;
   },
 
   // メインループ
