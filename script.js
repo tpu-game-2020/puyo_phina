@@ -23,7 +23,7 @@ var CONFIG_PLAYER_GROUND_FRAME = 20; // 何フレーム接地したらぷよを�
 var CONFIG_PLAYER_MOVE_FRAME = 10; // 左右移動に消費するフレーム数
 var CONFIG_PLAYER_ROTATE_FRAME = 10; // 回転に消費するフレーム数
 
-var BLOCK_SIZE      = 64;
+var BLOCK_SIZE      = 624;
 var PADDLE_WIDTH    = 150;
 var PADDLE_HEIGHT   = 32;
 var BALL_RADIUS     = 16;
