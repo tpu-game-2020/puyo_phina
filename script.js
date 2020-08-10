@@ -672,6 +672,10 @@ phina.define("MainScene", {
     // フレーム数
     this.frame = 0;
 
+    this.combinationLabel = Label('0').addChildTo(this);
+    this.combinationLabel.x = this.gridX.center(-5);
+    this.combinationLabel.y = this.gridY.span(1);
+    this.combinationLabel.fill = 'white';
     // 連鎖数
     this.combinationCount = 0;
     
@@ -797,7 +801,7 @@ phina.define("MainScene", {
       score: this.score,
     });
   },
-
+//
   _accessor: {
     score: {
       get: function() {
@@ -806,6 +810,16 @@ phina.define("MainScene", {
       set: function(v) {
         this._score = v;
         this.scoreLabel.text = v;
+      },
+    },
+    
+    combinationCount: {
+      get: function() {
+        return this._combinationCount;
+      },
+      set: function(w) {
+        this._combinationCount = w;
+        this.combinationLabel.text = w;
       },
     },
   }
