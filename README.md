@@ -1,7 +1,8 @@
 # ぷよぷよ in phina.js
 
 
-[「こちらのURLで」](https://keisukeyamashita913.github.io/puyo_phina/)
+[「1824074_山下慶輔_ゲームアーキテクチャ課題」](https://keisukeyamashita913.github.io/puyo_phina/)
+
 
 
 
