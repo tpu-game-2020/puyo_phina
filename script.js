@@ -16,7 +16,7 @@ var CONFIG_FREE_FALLING_SPEED = 16; // 自由落下のスピード
 var CONFIG_ERASE_PUYO_COUNT = 4; // 何個以上揃ったら消えるか
 var CONFIG_ERASE_ANIMATION_DURATION = 30; // 何フレームでぷよを消すか
 
-var CONFIG_PUYO_COLORS = 4; // 何色のぷよを使うか
+var CONFIG_PUYO_COLORS = 5; // 何色のぷよを使うか 7色まで可能
 var CONFIG_PLAYER_FALLING_SPEED = 0.9; // プレイ中の自然落下のスピード
 var CONFIG_PLAYER_DOWN_SPEED = 10; // プレイ中の下キー押下時の落下スピード
 var CONFIG_PLAYER_GROUND_FRAME = 20; // 何フレーム接地したらぷよを固定するか
@@ -154,8 +154,6 @@ class Stage{
         // 自由落下終了
         puyo.info.departure = puyo.info.destination;
         puyo.remove();
-        // 固定ぷよを表示する
-//        Stage.setPuyo(puyo.info.x, puyo.info.dst, puyo.info.color);
       } else {
         // まだ落下しているぷよがあることを記録する
         isFalling = true;
@@ -328,8 +326,8 @@ class Player{
     const puyoColors = Math.max(1, Math.min(5, CONFIG_PUYO_COLORS));
     this.centerPuyo = Math.floor(Math.random() * puyoColors) + 1;
     this.movablePuyo = Math.floor(Math.random() * puyoColors) + 1;
-    // 新しいぷよ画像を作成する
-
+    
+	// 新しいぷよ画像を作成する
     let centerPuyo = scene.centerPuyo;
     centerPuyo.setColor(this.centerPuyo);
     centerPuyo.alpha = 1.0;
@@ -337,10 +335,6 @@ class Player{
     movablePuyo.setColor(this.movablePuyo);
     movablePuyo.alpha = 1.0;
 
-//    this.centerPuyoElement = PuyoImage.getPuyo(this.centerPuyo);
-//    this.movablePuyoElement = PuyoImage.getPuyo(this.movablePuyo);
-//    this.Stage.stageElement.appendChild(this.centerPuyoElement);
-//    this.Stage.stageElement.appendChild(this.movablePuyoElement);
     
     // ぷよの初期配置を定める
     this.puyoStatus = {
@@ -376,10 +370,6 @@ class Player{
       x + BOARD_OFFSET_X + CONFIG_PUYO_IMG_WIDTH / 2, 
       y + BOARD_OFFSET_Y + CONFIG_PUYO_IMG_HEIGHT / 2);
 
-//    this.centerPuyoElement.style.left = this.puyoStatus.left + 'px';
-//    this.centerPuyoElement.style.top = this.puyoStatus.top + 'px';
-//    this.movablePuyoElement.style.left = x + 'px';
-//    this.movablePuyoElement.style.top = y + 'px';
   }
 
   falling (isDownPressed) {
@@ -443,15 +433,15 @@ class Player{
   playing(frame, keyboard, scene) {
     // まず自由落下を確認する
     // 下キーが押されていた場合、それ込みで自由落下させる
-    if(this.falling(keyboard.getKey("down"))) {
+    if(this.falling(keyboard.getKey("down")||keyboard.getKey("s")||keyboard.getKey("space"))) {
       // 落下が終わっていたら、ぷよを固定する
       this.setPuyoPosition(scene);
       return 'fix';
     }
     this.setPuyoPosition(scene);
-    if(keyboard.getKeyDown("right") || keyboard.getKeyDown("left")) {
+    if(keyboard.getKeyDown("right") || keyboard.getKeyDown("left")||keyboard.getKeyDown("a")||keyboard.getKeyDown("d")) {
       // 左右の確認をする
-      const cx = (keyboard.getKeyDown("right")) ? 1 : -1;
+      const cx = (keyboard.getKeyDown("right")||keyboard.getKeyDown("d")) ? 1 : -1;
       const x = this.puyoStatus.x;
       const y = this.puyoStatus.y;
       const mx = x + this.puyoStatus.dx;
@@ -490,7 +480,7 @@ class Player{
         this.puyoStatus.x += cx;
         return 'moving';
       }
-    } else if(keyboard.getKeyDown("up")) {
+    } else if(keyboard.getKeyDown("up")||keyboard.getKeyDown("w")) {
       // 回転を確認する
       // 回せるかどうかは後で確認。まわすぞ
       const x = this.puyoStatus.x;
@@ -821,9 +811,9 @@ phina.define('Puyo', {
   init: function(index, color) {
     this.superInit({
       width: CONFIG_PUYO_IMG_WIDTH - 4,
-      height: CONFIG_PUYO_IMG_HEIGHT - 4,
+      height: CONFIG_PUYO_IMG_HEIGHT - 6,
       stroke: null,
-      cornerRadius: 8,
+      cornerRadius: 30,
     });
     this.index = index;
     this.color = color;
@@ -838,13 +828,14 @@ phina.define('Puyo', {
     this.color = c;
     switch(this.color)
     {
-      case 0:this.fill = 'hsl(0, 0%, 0%)'; break;
-      case 1:this.fill = 'hsl(0, 60%, 60%)'; break;
-      case 2:this.fill = 'hsl(240, 60%, 60%)'; break;
-      case 3:this.fill = 'hsl(120, 60%, 60%)'; break;
-      case 4:this.fill = 'hsl(60, 60%, 60%)'; break;
-      case 5:this.fill = 'hsl(180, 60%, 60%)'; break;
-      case 6:this.fill = 'hsl(300, 60%, 60%)'; break;
+      case 0:this.fill = 'hsl(0, 0%, 0%)'; break;		//黒
+      case 1:this.fill = 'hsl(0, 60%, 60%)'; break;		//赤
+      case 2:this.fill = 'hsl(215, 60%, 60%)'; break;	//青
+      case 3:this.fill = 'hsl(120, 60%, 60%)'; break;	//緑
+      case 4:this.fill = 'hsl(60, 60%, 60%)'; break;	//黄
+	  case 5:this.fill = 'hsl(280, 60%, 60%)';break;	//紫
+      case 6:this.fill = 'hsl(180, 60%, 60%)'; break;	//水
+      case 7:this.fill = 'hsl(300, 60%, 60%)'; break;	//桃
     }
   }
 
@@ -883,7 +874,7 @@ phina.define("SplashScene", {
     };
     // ラベル表示
     Label({
-      text: '↑：回転\n← ↓ →：移動',
+      text: 'w or ↑：回転\n \n← ↓ →\nor\na s d\nor\nspace：移動',
       fontSize: 64,
       fill: '#fff',
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
