@@ -692,7 +692,7 @@ phina.define("MainScene", {
     
     // スコアラベル
     this.scoreLabel = Label('0').addChildTo(this);
-    this.scoreLabel.x = this.gridX.center();
+    this.scoreLabel.x = this.gridX.span(1);
     this.scoreLabel.y = this.gridY.span(1);
     this.scoreLabel.fill = 'white';
 
