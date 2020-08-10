@@ -1,4 +1,4 @@
-﻿/*
+/*
  * note: 本プログラムはぷよぷよプログラミングのソースコードを参考にしています。商用利用はできません。
  */
 
@@ -17,7 +17,7 @@ var CONFIG_ERASE_PUYO_COUNT = 4; // 何個以上揃ったら消えるか
 var CONFIG_ERASE_ANIMATION_DURATION = 30; // 何フレームでぷよを消すか
 
 var CONFIG_PUYO_COLORS = 4; // 何色のぷよを使うか
-var CONFIG_PLAYER_FALLING_SPEED = 0.9; // プレイ中の自然落下のスピード
+var CONFIG_PLAYER_FALLING_SPEED = 3.5; // プレイ中の自然落下のスピード
 var CONFIG_PLAYER_DOWN_SPEED = 10; // プレイ中の下キー押下時の落下スピード
 var CONFIG_PLAYER_GROUND_FRAME = 20; // 何フレーム接地したらぷよを固定するか
 var CONFIG_PLAYER_MOVE_FRAME = 10; // 左右移動に消費するフレーム数
@@ -74,7 +74,7 @@ class Stage{
         }
       }
     }
-    this.puyoCount = puyoCount;  
+    this.puyoCount = puyoCount;
   }
 
   Board(x,y){
@@ -93,7 +93,7 @@ class Stage{
     // メモリにセットする
     this.board[y][x] = puyo;
   }
-  
+
   // 透明度だけ変える
   setPuyoAlpha(x, y, alpha){
     let idx = y * CONFIG_STAGE_COLS + x;
@@ -161,7 +161,7 @@ class Stage{
         isFalling = true;
         puyo.info.position = position;
       }
-    }); 
+    });
 
     return isFalling;
   }
@@ -210,7 +210,7 @@ class Stage{
         checkSequentialPuyo(dx, dy);
       };
     };
- 
+
     // 実際に削除できるかの確認を行う
     for(let y = 0; y < CONFIG_STAGE_ROWS; y++) {
       for(let x = 0; x < CONFIG_STAGE_COLS; x++) {
@@ -341,31 +341,31 @@ class Player{
 //    this.movablePuyoElement = PuyoImage.getPuyo(this.movablePuyo);
 //    this.Stage.stageElement.appendChild(this.centerPuyoElement);
 //    this.Stage.stageElement.appendChild(this.movablePuyoElement);
-    
+
     // ぷよの初期配置を定める
     this.puyoStatus = {
       x: 2, // 中心ぷよの位置: 左から2列目
       y: -1, // 画面上部ギリギリから出てくる
       left: 2 * CONFIG_PUYO_IMG_WIDTH,
-      top:  -1 * CONFIG_PUYO_IMG_HEIGHT, 
+      top:  -1 * CONFIG_PUYO_IMG_HEIGHT,
       dx: 0, // 動くぷよの相対位置: 動くぷよは上方向にある
       dy: -1,
       rotation: 90 // 動くぷよの角度は90度（上向き）
     };
-    
+
     // 接地時間はゼロ
     this.groundFrame = 0;
-    
+
     // ぷよを描画
     this.setPuyoPosition(scene);
-    
+
     return true;
   }
 
   setPuyoPosition (scene) {
 
     scene.centerPuyo.setPosition(
-      this.puyoStatus.left + BOARD_OFFSET_X + CONFIG_PUYO_IMG_WIDTH / 2, 
+      this.puyoStatus.left + BOARD_OFFSET_X + CONFIG_PUYO_IMG_WIDTH / 2,
       this.puyoStatus.top  + BOARD_OFFSET_Y + CONFIG_PUYO_IMG_HEIGHT / 2
       );
 
@@ -373,7 +373,7 @@ class Player{
     const y = this.puyoStatus.top  - Math.sin(this.puyoStatus.rotation * Math.PI / 180) * CONFIG_PUYO_IMG_HEIGHT;
 
     scene.movablePuyo.setPosition(
-      x + BOARD_OFFSET_X + CONFIG_PUYO_IMG_WIDTH / 2, 
+      x + BOARD_OFFSET_X + CONFIG_PUYO_IMG_WIDTH / 2,
       y + BOARD_OFFSET_Y + CONFIG_PUYO_IMG_HEIGHT / 2);
 
 //    this.centerPuyoElement.style.left = this.puyoStatus.left + 'px';
@@ -408,7 +408,7 @@ class Player{
         }
         y += 1;
         this.puyoStatus.y = y;
-        if(y + 1 >= CONFIG_STAGE_ROWS || this.Stage.Board(x, y + 1) 
+        if(y + 1 >= CONFIG_STAGE_ROWS || this.Stage.Board(x, y + 1)
         || (y + dy + 1 >= 0 && (y + dy + 1 >= CONFIG_STAGE_ROWS || this.Stage.Board(x + dx, y + dy + 1)))) {
           isBlocked = true;
         }
@@ -513,7 +513,7 @@ class Player{
         }
         // 右にずれる必要がある時、右にもブロックがあれば回転出来ないので確認する
         if(cx === 1) {
-          if(y + 1 < 0 || x + 1 < 0 || y + 1 >= CONFIG_STAGE_ROWS || x + 1 >= CONFIG_STAGE_COLS 
+          if(y + 1 < 0 || x + 1 < 0 || y + 1 >= CONFIG_STAGE_ROWS || x + 1 >= CONFIG_STAGE_COLS
             || this.Stage.Board(x + 1, y + 1)) {
             if(y + 1 >= 0) {
               // ブロックがある。回転出来なかった
@@ -554,7 +554,7 @@ class Player{
           }
         }
       }
-       
+
       if(canRotate) {
         // 上に移動する必要があるときは、一気にあげてしまう
         if(cy === -1) {
@@ -581,7 +581,7 @@ class Player{
     }
     return 'playing';
   }
-          
+
   moving(frame, scene) {
     // 移動中も自然落下はさせる
     this.falling();
@@ -593,7 +593,7 @@ class Player{
     }
     return true;
   }
-          
+
   rotating(frame, scene) {
     // 回転中も自然落下はさせる
     this.falling();
@@ -627,7 +627,7 @@ class Player{
     // 操作用に作成したぷよ画像を消す
     scene.centerPuyo.alpha = 0.0;
     scene.movablePuyo.alpha = 0.0;
-  }  
+  }
 };
 
 phina.define("MainScene", {
@@ -645,7 +645,7 @@ phina.define("MainScene", {
 
     // グループ
     this.group = DisplayElement().addChildTo(this);
- 
+
     // ぷよをひとまず配置しておく
     (CONFIG_STAGE_COLS*CONFIG_STAGE_ROWS).times(function(i) {
       // グリッド上でのインデックス
@@ -673,7 +673,7 @@ phina.define("MainScene", {
 
     // 連鎖数
     this.combinationCount = 0;
-    
+
     // スコアラベル
     this.scoreLabel = Label('0').addChildTo(this);
     this.scoreLabel.x = this.gridX.center();
@@ -699,7 +699,7 @@ phina.define("MainScene", {
           for(const info of fallingPuyoList) {
             var puyo = new Puyo(info.y * CONFIG_STAGE_COLS + info.x, info.color).addChildTo(this.falling_group);
             puyo.setPosition(
-              CONFIG_PUYO_IMG_WIDTH  * info.x + BOARD_OFFSET_X + CONFIG_PUYO_IMG_WIDTH/2, 
+              CONFIG_PUYO_IMG_WIDTH  * info.x + BOARD_OFFSET_X + CONFIG_PUYO_IMG_WIDTH/2,
               CONFIG_PUYO_IMG_HEIGHT * info.y + BOARD_OFFSET_Y + CONFIG_PUYO_IMG_HEIGHT/2);
             puyo.alpha = 1.0;
             puyo.info = info;
@@ -721,7 +721,7 @@ phina.define("MainScene", {
               this.stage.setPuyoAlpha(x, y, this.stage.board[y][x] == 0 ? 0.0 : 1.0);
             }
           }
-                
+
           this.state = 'checkErase';
         }
         break;
@@ -811,7 +811,6 @@ phina.define("MainScene", {
 
 });
 
-
 /*
  * ぷよ
  */
@@ -820,10 +819,12 @@ phina.define('Puyo', {
 
   init: function(index, color) {
     this.superInit({
-      width: CONFIG_PUYO_IMG_WIDTH - 4,
-      height: CONFIG_PUYO_IMG_HEIGHT - 4,
+      width: CONFIG_PUYO_IMG_WIDTH - 12,
+      height: CONFIG_PUYO_IMG_HEIGHT - 12,
+      shadowBlur: 10,
+      shadow:"white",
       stroke: null,
-      cornerRadius: 8,
+      cornerRadius: 24, //丸みを帯びさせた
     });
     this.index = index;
     this.color = color;
@@ -859,7 +860,7 @@ phina.define('BG', {
       y: BOARD_OFFSET_Y + BOARD_SIZE,
       width: BOARD_SIZE,
       height: BOARD_SIZE * 2,
-      fill: 'hsl({0}, 100%, 20%)',
+      fill: '#000',
       stroke: null,
       cornerRadius: 0,
     });
