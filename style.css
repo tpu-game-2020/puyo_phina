@@ -10,7 +10,9 @@ html {
 /* 本文の設定 */
 body {
 /*  color: #; /* 少しだけ明るい黒 */
-  background-color: hsl(213, 100%, 45%); /* 描画領域の外側は薄い灰色 */
+  background: url('Puyo4.png');
+  width: auto;
+  height: auto; */
 }
 
 /* 大見出しの設定 */
