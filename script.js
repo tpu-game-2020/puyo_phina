@@ -796,6 +796,9 @@ phina.define("MainScene", {
         break;
     }
     this.frame += app.deltaTime * 60.0;
+    
+    //スコアラベルのテキストをセット
+    this.scoreLabel.text = 'score : ' + this.score;
      
     //タイムラベルのテキスト
     timeLabel.text = 'time : ' + Math.floor(time / 30);
