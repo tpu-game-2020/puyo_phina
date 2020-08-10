@@ -12,13 +12,13 @@ var CONFIG_PUYO_IMG_HEIGHT = 68; // ぷよぷよ画像の高さ
 var CONFIG_STAGE_COLS = 6;
 var CONFIG_STAGE_ROWS = 12;
 
-var CONFIG_FREE_FALLING_SPEED = 16; // 自由落下のスピード
+var CONFIG_FREE_FALLING_SPEED = 30; // 自由落下のスピード
 var CONFIG_ERASE_PUYO_COUNT = 4; // 何個以上揃ったら消えるか
 var CONFIG_ERASE_ANIMATION_DURATION = 30; // 何フレームでぷよを消すか
 
 var CONFIG_PUYO_COLORS = 4; // 何色のぷよを使うか
 var CONFIG_PLAYER_FALLING_SPEED = 0.9; // プレイ中の自然落下のスピード
-var CONFIG_PLAYER_DOWN_SPEED = 10; // プレイ中の下キー押下時の落下スピード
+var CONFIG_PLAYER_DOWN_SPEED = 50; // プレイ中の下キー押下時の落下スピード
 var CONFIG_PLAYER_GROUND_FRAME = 20; // 何フレーム接地したらぷよを固定するか
 var CONFIG_PLAYER_MOVE_FRAME = 10; // 左右移動に消費するフレーム数
 var CONFIG_PLAYER_ROTATE_FRAME = 10; // 回転に消費するフレーム数
@@ -859,7 +859,7 @@ phina.define('BG', {
       y: BOARD_OFFSET_Y + BOARD_SIZE,
       width: BOARD_SIZE,
       height: BOARD_SIZE * 2,
-      fill: 'hsl({0}, 100%, 20%)',
+      fill: 'hsla(108,49%,14%,.1)',
       stroke: null,
       cornerRadius: 0,
     });
@@ -885,7 +885,7 @@ phina.define("SplashScene", {
     Label({
       text: '↑：回転\n← ↓ →：移動',
       fontSize: 64,
-      fill: '#fff',
+      fill: '#999',
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
   },
 });
@@ -893,11 +893,11 @@ phina.define("SplashScene", {
 phina.main(function() {
   // アプリケーションクラスの生成
   var app = GameApp({
-    title: 'puyo',
+    title: 'PUYOPUYO',
     startLabel: location.search.substr(1).toObject().scene || 'splash',
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
-    backgroundColor: '#444',
+    backgroundColor: '#1311',
     autoPause: true,
     debug: false,
   });

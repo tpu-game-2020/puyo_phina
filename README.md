@@ -1,11 +1,14 @@
 # ぷよぷよ in phina.js
-phina.js で動くようにした、ぷよぷよです。
 
-GitHub Pages の機能を使って、[「こちらのURLで」](https://tpu-game.github.io/puyo_phina/)そのまま遊べます。
 
-[『ぷよぷよプログラミング』](http://puyo.sega.jp/program_2020/)で動かしていますが、完全には移植していないので、不具合・未動作があります。
+[「1824074_山下慶輔_ゲームアーキテクチャ課題」](https://keisukeyamashita913.github.io/puyo_phina/)
+- 下ボタンを押したときの落下速度を上げました
+- 描画領域外を画像にしました
+- 背景色を変えました
 
-![プレイ画面](result.png)
+![プレイ画面](PUYO_SS.png)
+
+
 
 # 課題
 こちらは、東京工芸大学「ゲームアーキテクチャ論」の課題になります。

@@ -9,8 +9,10 @@ html {
 
 /* 本文の設定 */
 body {
-/*  color: #444; /* 少しだけ明るい黒 */
-  background-color: hsl(0, 0%, 96%); /* 描画領域の外側は薄い灰色 */
+/*  color: #; /* 少しだけ明るい黒 */
+  background: url('Puyo4.png');
+  width: auto;
+  height: auto; */
 }
 
 /* 大見出しの設定 */
