@@ -706,8 +706,13 @@ phina.define("MainScene", {
     time --;
     if(time === 0){
       //resultシーンに遷移
-      this.exit('result',{score:this.score,message:'遊んでくれてありがとう'});
+      this.exit('result',{score:score,message:'遊んでくれてありがとう'});
     }
+      //スコアラベルのテキストをセット
+    this.scoreLabel.text = 'score : ' + this.score;
+     
+    //タイムラベルのテキスト
+    timeLabel.text = 'time : ' + Math.floor(time / 30);
     switch(this.state)
     {
       case 'start':
@@ -796,12 +801,6 @@ phina.define("MainScene", {
         break;
     }
     this.frame += app.deltaTime * 60.0;
-    
-    //スコアラベルのテキストをセット
-    this.scoreLabel.text = 'score : ' + this.score;
-     
-    //タイムラベルのテキスト
-    timeLabel.text = 'time : ' + Math.floor(time / 30);
   },
 
   calculateScore: function(rensa, piece, color) {
