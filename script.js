@@ -10,7 +10,7 @@ var SCREEN_HEIGHT   = 960;
 var CONFIG_PUYO_IMG_WIDTH  = 68; // ぷよぷよ画像の幅
 var CONFIG_PUYO_IMG_HEIGHT = 68; // ぷよぷよ画像の高さ
 var CONFIG_STAGE_COLS = 6;
-var CONFIG_STAGE_ROWS = 12;
+var CONFIG_STAGE_ROWS = 13;
 
 var CONFIG_FREE_FALLING_SPEED = 16; // 自由落下のスピード
 var CONFIG_ERASE_PUYO_COUNT = 4; // 何個以上揃ったら消えるか
@@ -45,6 +45,7 @@ class Stage{
   initialize(group)
   {
     this.board = [
+      [0,0,0,0,0,0],
       [0,0,0,0,0,0],
       [0,0,0,0,0,0],
       [0,0,0,0,0,0],
@@ -671,6 +672,10 @@ phina.define("MainScene", {
     // フレーム数
     this.frame = 0;
 
+    this.combinationLabel = Label('0').addChildTo(this);
+    this.combinationLabel.x = this.gridX.center(-5);
+    this.combinationLabel.y = this.gridY.span(1);
+    this.combinationLabel.fill = 'white';
     // 連鎖数
     this.combinationCount = 0;
     
@@ -805,6 +810,16 @@ phina.define("MainScene", {
       set: function(v) {
         this._score = v;
         this.scoreLabel.text = v;
+      },
+    },
+    
+    combinationCount: {
+      get: function() {
+        return this._combinationCount;
+      },
+      set: function(w) {
+        this._combinationCount = w;
+        this.combinationLabel.text = w;
       },
     },
   }
