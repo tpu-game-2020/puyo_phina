@@ -912,7 +912,7 @@ phina.main(function() {
     startLabel: location.search.substr(1).toObject().scene || 'splash',
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
-    backgroundColor: '#111',
+    backgroundColor: '#444',
     autoPause: true,
     debug: false,
   });
