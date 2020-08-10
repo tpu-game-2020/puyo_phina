@@ -885,7 +885,7 @@ phina.define("SplashScene", {
     Label({
       text: '↑：回転\n← ↓ →：移動',
       fontSize: 64,
-      fill: '#fff',
+      fill: '#f',
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
   },
 });
@@ -897,7 +897,7 @@ phina.main(function() {
     startLabel: location.search.substr(1).toObject().scene || 'splash',
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
-    backgroundColor: '#700',
+    backgroundColor: '#0067E6',
     autoPause: true,
     debug: false,
   });
