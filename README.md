@@ -1,5 +1,5 @@
 # ぷよぷよ in phina.js
-phina.js で動くようにした、ぷよぷよです。
+
 
 [「こちらのURLで」](https://keisukeyamashita913.github.io/puyo_phina/)
 
