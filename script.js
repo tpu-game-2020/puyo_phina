@@ -859,7 +859,7 @@ phina.define('BG', {
       y: BOARD_OFFSET_Y + BOARD_SIZE,
       width: BOARD_SIZE,
       height: BOARD_SIZE * 2,
-      fill: 'hsl({0}, 100%, 20%)',
+      fill: 'hsla(108,49%,14%,.1)',
       stroke: null,
       cornerRadius: 0,
     });
@@ -885,7 +885,7 @@ phina.define("SplashScene", {
     Label({
       text: '↑：回転\n← ↓ →：移動',
       fontSize: 64,
-      fill: '#f',
+      fill: '#999',
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
   },
 });
@@ -897,7 +897,7 @@ phina.main(function() {
     startLabel: location.search.substr(1).toObject().scene || 'splash',
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
-    backgroundColor: '#0067E6',
+    backgroundColor: '#1311',
     autoPause: true,
     debug: false,
   });
