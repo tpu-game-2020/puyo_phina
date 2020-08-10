@@ -35,6 +35,11 @@ var BOARD_PADDING   = (SCREEN_WIDTH - BOARD_SIZE) / 2;
 var BOARD_OFFSET_X  = BOARD_PADDING;
 var BOARD_OFFSET_Y  = 100;
 
+var time;
+var score;
+var timeLabel;
+var scoreLabel;
+
 class Stage{
   constructor() {
     this.fallingPuyoList = [];
