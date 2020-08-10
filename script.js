@@ -10,7 +10,7 @@ var SCREEN_HEIGHT   = 960;
 var CONFIG_PUYO_IMG_WIDTH  = 68; // ぷよぷよ画像の幅
 var CONFIG_PUYO_IMG_HEIGHT = 68; // ぷよぷよ画像の高さ
 var CONFIG_STAGE_COLS = 6;
-var CONFIG_STAGE_ROWS = 12;
+var CONFIG_STAGE_ROWS = 13;//
 
 var CONFIG_FREE_FALLING_SPEED = 16; // 自由落下のスピード
 var CONFIG_ERASE_PUYO_COUNT = 4; // 何個以上揃ったら消えるか
@@ -42,9 +42,10 @@ class Stage{
     this.puyoCount = 0;
   }
 
-  initialize(group)
+  initialize(group)//
   {
     this.board = [
+      [0,0,0,0,0,0],
       [0,0,0,0,0,0],
       [0,0,0,0,0,0],
       [0,0,0,0,0,0],
