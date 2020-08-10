@@ -650,7 +650,10 @@ phina.define("MainScene", {
 
     // グループ
     this.group = DisplayElement().addChildTo(this);
- 
+    
+    //時間
+    time = 900;
+    
     // ぷよをひとまず配置しておく
     (CONFIG_STAGE_COLS*CONFIG_STAGE_ROWS).times(function(i) {
       // グリッド上でのインデックス
@@ -665,6 +668,14 @@ phina.define("MainScene", {
 
     this.centerPuyo = new Puyo(-1, 1).addChildTo(this);
     this.movablePuyo = new Puyo(-2, 1).addChildTo(this);
+    
+    //タイムラベルwhite yellow
+    timeLabel = Label({
+      fontSize: 40,
+      fill: 'white',
+        x: this.gridX.center(),
+        y: 150,
+    }).addChildTo(this);
 
     // ステージを準備する
     this.stage = new Stage();
@@ -691,7 +702,12 @@ phina.define("MainScene", {
 
   // メインループ
   update: function(app) {
-
+    //time をデクリメント
+    time --;
+    if(time === 0){
+      //resultシーンに遷移
+      this.exit('result',{score:score,message:'遊んでくれてありがとう'});
+    }
     switch(this.state)
     {
       case 'start':
@@ -780,6 +796,9 @@ phina.define("MainScene", {
         break;
     }
     this.frame += app.deltaTime * 60.0;
+     
+    //タイムラベルのテキスト
+    timeLabel.text = 'time : ' + Math.floor(time / 30);
   },
 
   calculateScore: function(rensa, piece, color) {
