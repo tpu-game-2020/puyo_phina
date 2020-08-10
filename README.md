@@ -1,7 +1,7 @@
 # ぷよぷよ in phina.js
 phina.js で動くようにした、ぷよぷよです。
 
-GitHub Pages の機能を使って、[「こちらのURLで」](https://tpu-game.github.io/puyo_phina/)そのまま遊べます。
+GitHub Pages の機能を使って、[「こちらのURLで」](https://Yo-yuya.github.io/puyo_phina/)そのまま遊べます。
 
 [『ぷよぷよプログラミング』](http://puyo.sega.jp/program_2020/)で動かしていますが、完全には移植していないので、不具合・未動作があります。
 
@@ -24,6 +24,12 @@ GitHub Pages の機能を使って、[「こちらのURLで」](https://tpu-game
 - プログラムを書き換えてください
 - 更新内容はコミットログに記載するとともにREADME.mdに記載して下さい
 - 自分で納得できたところで、本リポジトリにプルリクエストを投げてください。
+
+##　変更箇所
+- ←↑→↓だけでなくwasd,spaceでの操作を可能に
+- コメントアウトコードの削除
+- ぷよの形とカラーを本物に近づけた
+
 
 # ライセンス
 本プロジェクトは、[『ぷよぷよプログラミング』](http://puyo.sega.jp/program_2020/)を見て実装しています。
