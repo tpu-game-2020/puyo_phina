@@ -706,7 +706,7 @@ phina.define("MainScene", {
     time --;
     if(time === 0){
       //resultシーンに遷移
-      this.exit('result',{score:score,message:'遊んでくれてありがとう'});
+      this.exit('result',{score:this.score,message:'遊んでくれてありがとう'});
     }
     switch(this.state)
     {
