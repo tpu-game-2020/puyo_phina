@@ -801,7 +801,7 @@ phina.define("MainScene", {
       score: this.score,
     });
   },
-//
+
   _accessor: {
     score: {
       get: function() {
