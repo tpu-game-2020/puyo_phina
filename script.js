@@ -35,6 +35,11 @@ var BOARD_PADDING   = (SCREEN_WIDTH - BOARD_SIZE) / 2;
 var BOARD_OFFSET_X  = BOARD_PADDING;
 var BOARD_OFFSET_Y  = 100;
 
+var time;
+var score;
+var timeLabel;
+var scoreLabel;
+
 class Stage{
   constructor() {
     this.fallingPuyoList = [];
@@ -645,7 +650,10 @@ phina.define("MainScene", {
 
     // グループ
     this.group = DisplayElement().addChildTo(this);
- 
+    
+    //時間
+    time = 900;
+    
     // ぷよをひとまず配置しておく
     (CONFIG_STAGE_COLS*CONFIG_STAGE_ROWS).times(function(i) {
       // グリッド上でのインデックス
@@ -660,6 +668,14 @@ phina.define("MainScene", {
 
     this.centerPuyo = new Puyo(-1, 1).addChildTo(this);
     this.movablePuyo = new Puyo(-2, 1).addChildTo(this);
+    
+    //タイムラベルwhite yellow
+    timeLabel = Label({
+      fontSize: 40,
+      fill: 'white',
+      x: this.gridX.center(),
+      y: 150,
+    }).addChildTo(this);
 
     // ステージを準備する
     this.stage = new Stage();
@@ -676,7 +692,7 @@ phina.define("MainScene", {
     
     // スコアラベル
     this.scoreLabel = Label('0').addChildTo(this);
-    this.scoreLabel.x = this.gridX.center();
+    this.scoreLabel.x = this.gridX.span(3);
     this.scoreLabel.y = this.gridY.span(1);
     this.scoreLabel.fill = 'white';
 
@@ -686,7 +702,17 @@ phina.define("MainScene", {
 
   // メインループ
   update: function(app) {
-
+    //time をデクリメント
+    time --;
+    if(time === 0){
+      //resultシーンに遷移
+      this.exit('result',{score:score,message:'遊んでくれてありがとう'});
+    }
+      //スコアラベルのテキストをセット
+    this.scoreLabel.text = 'score : ' + this.score;
+     
+    //タイムラベルのテキスト
+    timeLabel.text = 'time : ' + Math.floor(time / 30);
     switch(this.state)
     {
       case 'start':
@@ -893,7 +919,7 @@ phina.define("SplashScene", {
 phina.main(function() {
   // アプリケーションクラスの生成
   var app = GameApp({
-    title: 'puyo',
+    title: 'ぷよぷよ',
     startLabel: location.search.substr(1).toObject().scene || 'splash',
     width: SCREEN_WIDTH,
     height: SCREEN_HEIGHT,
