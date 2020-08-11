@@ -673,8 +673,8 @@ phina.define("MainScene", {
     timeLabel = Label({
       fontSize: 40,
       fill: 'white',
-        x: this.gridX.span(3),
-        y: this.gridy.spam(3),
+      x: this.gridX.center(),
+      y: 150,
     }).addChildTo(this);
 
     // ステージを準備する
@@ -693,7 +693,7 @@ phina.define("MainScene", {
     // スコアラベル
     this.scoreLabel = Label('0').addChildTo(this);
     this.scoreLabel.x = this.gridX.span(3);
-    this.scoreLabel.y = this.gridY.span(1);
+    this.scoreLabel.y = 60,
     this.scoreLabel.fill = 'white';
 
     // スコア
